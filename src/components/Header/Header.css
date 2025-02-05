@@ -1,0 +1,150 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(44, 62, 80, 0.95);
+  backdrop-filter: blur(8px);
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ecf0f1;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  background-color: #3498db;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
+
+.full-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  display: inline-block;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ecf0f1;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 70%;
+}
+
+.nav-link:hover {
+  color: #3498db;
+}
+
+.resume-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.resume-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.resume-btn::after {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 15px;
+  }
+
+  .full-name {
+    display: none;
+  }
+
+  .links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+
+  .resume-btn {
+    padding: 6px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link:not(.resume-btn) {
+    padding: 6px 8px;
+  }
+
+  .links {
+    gap: 0.5rem;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
