@@ -8,6 +8,8 @@ function Contact() {
         subject: '',
         message: ''
     });
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,18 +19,41 @@ function Contact() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically handle the form submission
-        console.log('Form submitted:', formData);
-        // Reset form after submission
-        setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-        });
-        alert('Thank you for your message! I will get back to you soon.');
+        setLoading(true);
+        setStatus('');
+
+        try {
+            const response = await fetch('http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setStatus('success');
+                setFormData({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                });
+                alert('Message sent successfully!');
+            } else {
+                throw new Error(data.message || 'Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setStatus('error');
+            alert(error.message || 'An error occurred. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -81,8 +106,20 @@ function Contact() {
                             rows="5"
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-btn">Send Message</button>
+                    <button
+                        type="submit"
+                        className="submit-btn"
+                        disabled={loading}
+                    >
+                        {loading ? 'Sending...' : 'Send Message'}
+                    </button>
                 </form>
+                {status === 'success' && (
+                    <p className="success-message">Message sent successfully!</p>
+                )}
+                {status === 'error' && (
+                    <p className="error-message">Failed to send message. Please try again.</p>
+                )}
             </div>
         </div>
     );

@@ -8,7 +8,6 @@
   backdrop-filter: blur(8px);
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
 }
 
 nav {
@@ -19,6 +18,14 @@ nav {
   max-width: 1400px;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+/* Add hamburger menu styles */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  color: #ecf0f1;
+  cursor: pointer;
 }
 
 .name {
@@ -108,6 +115,39 @@ nav {
 @media (max-width: 768px) {
   nav {
     padding: 1rem 15px;
+    position: relative;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: rgba(44, 62, 80, 0.95);
+    padding: 1rem;
+    gap: 1rem;
+    display: none;
+    backdrop-filter: blur(8px);
+  }
+
+  .links.active {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .resume-btn {
+    width: auto;
+    margin: 0 auto;
   }
 
   .full-name {
