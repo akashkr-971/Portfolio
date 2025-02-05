@@ -25,7 +25,7 @@ function Contact() {
         setStatus('');
 
         try {
-            const response = await fetch('https://akashkrportfolio.vercel.app:5000/api/contact', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
