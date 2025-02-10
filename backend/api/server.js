@@ -16,7 +16,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => {
-        console.error('MongoDB connection error:', err);
+        console.error('MongoDB connection error:', err.message);
         process.exit(1); // Exit if cannot connect to database
     });
 
@@ -62,20 +62,20 @@ app.post('/api/contact', async (req, res) => {
             message: 'Message saved successfully'
         });
     } catch (error) {
-        console.error('Error saving message:', error);
+        console.error('Error saving message:', error.message);
         res.status(500).json({
             success: false,
-            message: 'Error saving message'
+            message: 'Error saving message: ' + error.message
         });
     }
 });
 
 // Add error handler middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error('Unhandled error:', err.message);
     res.status(500).json({
         success: false,
-        message: 'Something broke!'
+        message: 'Something broke! Error: ' + err.message
     });
 });
 
