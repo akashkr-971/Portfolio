@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
 // MongoDB connection with better error handling
@@ -52,11 +51,8 @@ export default async function handler(req, res) {
                 message: 'Message saved successfully'
             });
         } catch (error) {
-            console.error('Error saving message:', error.message);
-            res.status(500).json({
-                success: false,
-                message: 'Error saving message: ' + error.message
-            });
+            console.error('Error saving message:', error);
+            res.status(500).json({ success: false, message: 'Error saving message' });
         }
     } else {
         res.setHeader('Allow', ['POST']);
