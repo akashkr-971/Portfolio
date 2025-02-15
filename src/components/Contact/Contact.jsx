@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { init, send } from '@emailjs/browser';
 import './Contact.css';
+
+// Initialize EmailJS with your User ID
+init(import.meta.env.VITE_EMAILJS_USER_ID); // Replace with your EmailJS user ID
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -25,17 +29,14 @@ function Contact() {
         setStatus('');
 
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
+            const response = await send('portfolio_email', 'Portfolio_template', {
+                name: formData.name,
+                email: formData.email,
+                subject: formData.subject,
+                message: formData.message
+            }, import.meta.env.VITE_EMAILJS_USER_ID); // Replace with your service ID, template ID, and user ID
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (response.status === 200) {
                 setStatus('success');
                 setFormData({
                     name: '',
@@ -43,9 +44,8 @@ function Contact() {
                     subject: '',
                     message: ''
                 });
-                alert('Message sent successfully!');
             } else {
-                throw new Error(data.message || 'Failed to send message');
+                throw new Error('Failed to send message');
             }
         } catch (error) {
             console.error('Error:', error);
