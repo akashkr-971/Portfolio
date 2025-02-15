@@ -29,7 +29,7 @@ function Contact() {
         setStatus('');
 
         try {
-            const response = await send('portfolio_email', 'Portfolio_template', {
+            const response = await send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, {
                 name: formData.name,
                 email: formData.email,
                 subject: formData.subject,
