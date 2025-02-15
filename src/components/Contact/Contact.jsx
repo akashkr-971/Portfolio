@@ -3,7 +3,7 @@ import { init, send } from '@emailjs/browser';
 import './Contact.css';
 
 // Initialize EmailJS with your User ID
-init(import.meta.env.VITE_EMAILJS_USER_ID); // Replace with your EmailJS user ID
+init('27lxZrkMelXztlF2l'); // Replace with your EmailJS user ID
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -29,12 +29,12 @@ function Contact() {
         setStatus('');
 
         try {
-            const response = await send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, {
+            const response = await send('service_27lxZrk', 'template_27lxZrk', {
                 name: formData.name,
                 email: formData.email,
                 subject: formData.subject,
                 message: formData.message
-            }, import.meta.env.VITE_EMAILJS_USER_ID); // Replace with your service ID, template ID, and user ID
+            }, '27lxZrkMelXztlF2l'); // Replace with your service ID, template ID, and user ID
 
             if (response.status === 200) {
                 setStatus('success');
