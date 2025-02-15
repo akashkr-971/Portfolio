@@ -29,7 +29,7 @@ function Contact() {
         setStatus('');
 
         try {
-            const response = await send('service_27lxZrk', 'template_27lxZrk', {
+            const response = await send('portfolio_email', 'Portfolio_template', {
                 name: formData.name,
                 email: formData.email,
                 subject: formData.subject,
